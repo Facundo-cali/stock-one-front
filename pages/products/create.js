@@ -21,7 +21,7 @@ function create() {
         // Mostrar el indicador de carga
         setIsLoading(true);
         // Llamar a la función proporcionada para agregar el producto
-        fetch('http://localhost:3001/api/products/add', {
+        fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/products/add`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
