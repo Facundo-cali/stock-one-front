@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <>
       <div>
-        <h1>Hello Worldaa</h1>
+        <h1>Hello World</h1>
         <Link href="/products/create">Create Product</Link>
       </div>
     </>
