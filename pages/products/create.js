@@ -20,10 +20,8 @@ function create() {
 
         // Mostrar el indicador de carga
         setIsLoading(true);
-
-        const backendURL = process.env.NEXT_PUBLIC_BACKEND_URL; // Extrae la URL base desde la variable de entorno
         // Llamar a la función proporcionada para agregar el producto
-        fetch(`${backendURL}/products/add`, {
+        fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/products/add`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
