@@ -1,7 +1,11 @@
-
 import { useState } from 'react';
+import { useProduct } from './ProductContext';
+
+
 
 function create() {
+    const { addProduct, fetchProducts } = useProduct();
+
     const [isLoading, setIsLoading] = useState(false);
     const [product, setProduct] = useState({
         name: '',
@@ -18,10 +22,8 @@ function create() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        // Mostrar el indicador de carga
         setIsLoading(true);
-        // Llamar a la función proporcionada para agregar el producto
+
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/products/add`, {
                 method: 'POST',
@@ -30,28 +32,28 @@ function create() {
                 },
                 body: JSON.stringify(product),
             });
-
             if (!response.ok) {
                 throw new Error('Error al agregar el producto');
             }
-
             const data = await response.json();
             console.log('Producto agregado con éxito:', data);
+
+            // Después de agregar el producto con éxito, actualiza la lista de productos
+            await fetchProducts();
+
+            // Restablecer el formulario o el estado del nuevo producto
+            setProduct({
+                name: '',
+                code: '',
+                quantity: '',
+                price: '',
+                description: '',
+            });
         } catch (error) {
             console.error('Error:', error);
         } finally {
             setIsLoading(false);
         }
-
-
-        // Limpiar el formulario
-        setProduct({
-            name: '',
-            code: '',
-            quantity: '',
-            price: '',
-            description: '',
-        });
     };
 
     return (

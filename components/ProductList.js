@@ -1,24 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import { useProduct } from './ProductContext';
+import { useEffect } from 'react';
 
 function ViewProducts() {
-    const [products, setProducts] = useState([]);
+    const { products, fetchProducts } = useProduct();
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/products/get`); // Suponiendo que '/api/products' es la ruta de tu API para obtener productos.
-                if (!response.ok) {
-                    throw new Error('Error al obtener los productos');
-                }
-                const data = await response.json();
-                setProducts(data);
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        };
-
-        fetchData();
-    }, []);
+        // Si no hay productos en el estado global, obtén los productos de la base de datos, de lo contrario evita que se haga una solicitud cada vez que se renderiza el componente.
+        if (products.length === 0) {
+            fetchProducts();
+        }
+    }, [products]);
 
     return (
         <div className="table-container">
