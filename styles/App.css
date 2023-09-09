@@ -1,23 +1,65 @@
+/* Estilos generales */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #e5e5e5;
+}
+
+/* Estilos para el contenedor principal */
+.home-container {
+  display: flex;
+  justify-content: flex-start; /* Botones a la izquierda */
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+}
+
+/* Estilos para el contenedor de botones */
+.button-container {
+  display: flex;
+  flex-direction: column; /* Botones apilados verticalmente */
+}
+
+/* Estilos para los botones */
+.custom-button {
+  background-color: #007bff;
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 18px;
+  margin-bottom: 10px; /* Espacio entre los botones */
+}
+
+.custom-button:hover {
+  background-color: #0056b3;
+}
+
 /* Estilos para el formulario de agregar producto */
 form {
   text-align: center;
-  max-width: 400px;
+  max-width: 500px;
   margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  background-color: #f9f9f9;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  border: 2px solid #ccc;
+  background-color: #f5f5f5;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
 }
 
 h2 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 label {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  font-family: Arial, sans-serif;
 }
 
 /* Estilos para los campos de entrada */
@@ -25,33 +67,90 @@ input[type="text"],
 input[type="number"],
 textarea {
   width: 100%;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 3px;
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
   box-sizing: border-box;
-  margin-bottom: 20px;
-  font-size: 14px;
+  margin-bottom: 30px;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
 }
 
+/* Estilos para el botón de enviar en el formulario */
 button[type="submit"] {
   background-color: #007bff;
   color: white;
-  padding: 10px 20px;
+  padding: 15px 30px;
   border: none;
-  border-radius: 3px;
+  border-radius: 8px;
   cursor: pointer;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 18px;
+  float: right;
 }
 
 button[type="submit"]:hover {
   background-color: #0056b3;
 }
 
-/* Estilos para centrar el formulario verticalmente en la página */
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
+/* Estilos para el contenedor de la tabla */
+.table-container {
+  border-radius: 10px;
+  width: 80%;
+  margin: 20px auto;
+  max-height: 800px; /* Establece la altura máxima deseada */
+  overflow-y: auto; /* Agrega desplazamiento vertical si la tabla excede la altura */
+}
+
+/* Estilos para la tabla */
+table {
+  width: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  border-collapse: collapse;
+}
+
+/* Estilos para las celdas de la tabla (th y td) */
+th,
+td {
+  padding: 15px; /* Espacio interno para las celdas */
+  border-bottom: 2px solid #ddd;
+  text-align: left;
+  font-size: 16px;
+  border-right: 2px solid #ddd; /* Línea vertical entre las celdas */
+}
+
+/* Estilos para las filas impares de la tabla */
+tr:nth-child(odd) {
   background-color: #f5f5f5;
+}
+
+/* Estilos para las celdas de encabezado (th) */
+th {
+  background-color: #007bff;
+  color: white;
+  border-right: 2px solid #ddd; /* Línea vertical entre las celdas */
+}
+
+/* Estilos para el scroll vertical */
+.table-container::-webkit-scrollbar {
+  width: 10px; /* Ancho del scroll vertical */
+}
+
+/* Estilos para el track del scroll */
+.table-container::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Color de fondo del track */
+}
+
+/* Estilos para el thumb (barra de desplazamiento) del scroll */
+.table-container::-webkit-scrollbar-thumb {
+  background-color: #007bff; /* Color de la barra de desplazamiento */
+  border-radius: 5px; /* Borde redondeado de la barra de desplazamiento */
+}
+
+/* Estilos cuando se pasa el mouse sobre el thumb del scroll */
+.table-container::-webkit-scrollbar-thumb:hover {
+  background-color: #0056b3; /* Color de la barra de desplazamiento al pasar el mouse */
 }

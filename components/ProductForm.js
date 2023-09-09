@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 
 function create() {
@@ -15,28 +16,32 @@ function create() {
         setProduct({ ...product, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         // Mostrar el indicador de carga
         setIsLoading(true);
         // Llamar a la función proporcionada para agregar el producto
-        fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/products/add`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(product)
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log('Producto agregado con éxito:', data);
-                setIsLoading(false);
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-                setIsLoading(false);
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/products/add`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(product),
             });
+
+            if (!response.ok) {
+                throw new Error('Error al agregar el producto');
+            }
+
+            const data = await response.json();
+            console.log('Producto agregado con éxito:', data);
+        } catch (error) {
+            console.error('Error:', error);
+        } finally {
+            setIsLoading(false);
+        }
 
 
         // Limpiar el formulario
@@ -106,4 +111,4 @@ function create() {
     );
 }
 
-export default create
+export default create;
