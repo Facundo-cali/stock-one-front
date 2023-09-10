@@ -1,11 +1,10 @@
 import { useProduct } from './ProductContext';
 
 function ViewProducts() {
-    const { products } = useProduct();
+    const { products, isLoading } = useProduct();
 
-    // Si no hay productos en el estado global, muestra un mensaje
-    if (products.length === 0) {
-        return <p>No hay productos en el stock</p>;
+    if (isLoading) {
+        return <p>Cargando productos...</p>; // Muestra un mensaje de carga mientras isLoading es true
     }
 
     return (

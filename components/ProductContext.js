@@ -5,6 +5,7 @@ const ProductContext = createContext();
 // ProductProvider es un componente que envuelve a todos los componentes que necesitan acceder al estado de los productos
 export function ProductProvider({ children }) {
     const [products, setProducts] = useState([]);
+    const [isLoading, setIsLoading] = useState(true); // Agrega una variable de estado isLoading
 
     // Función para obtener los productos desde la base de datos
     const fetchProducts = async () => {
@@ -15,13 +16,15 @@ export function ProductProvider({ children }) {
             }
             const data = await response.json();
             setProducts(data);
+            setIsLoading(false); // Establece isLoading en false cuando se obtienen los productos
         } catch (error) {
             console.error('Error:', error);
+            setIsLoading(false);
         }
     };
 
     return (
-        <ProductContext.Provider value={{ products, setProducts, fetchProducts }}>
+        <ProductContext.Provider value={{ products, setProducts, fetchProducts, isLoading }}>
             {children}
         </ProductContext.Provider>
     );
