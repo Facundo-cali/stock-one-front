@@ -1,15 +1,12 @@
 import { useProduct } from './ProductContext';
-import { useEffect } from 'react';
 
 function ViewProducts() {
-    const { products, fetchProducts } = useProduct();
+    const { products } = useProduct();
 
-    useEffect(() => {
-        // Si no hay productos en el estado global, obtén los productos de la base de datos, de lo contrario evita que se haga una solicitud cada vez que se renderiza el componente.
-        if (products.length === 0) {
-            fetchProducts();
-        }
-    }, [products]);
+    // Si no hay productos en el estado global, muestra un mensaje
+    if (products.length === 0) {
+        return <p>No hay productos en el stock</p>;
+    }
 
     return (
         <div className="table-container">
@@ -29,7 +26,7 @@ function ViewProducts() {
                             <td>{product.name}</td>
                             <td>{product.code}</td>
                             <td>{product.quantity}</td>
-                            <td>${product.price.toFixed(2)}</td>
+                            <td>${product.price}</td>
                             <td>{product.description}</td>
                         </tr>
                     ))}
