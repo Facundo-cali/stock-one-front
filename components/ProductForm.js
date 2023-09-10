@@ -4,7 +4,7 @@ import { useProduct } from './ProductContext';
 
 
 function create() {
-    const { addProduct, fetchProducts } = useProduct();
+    const { products, setProducts } = useProduct(); // useProduct() es un hook personalizado que devuelve el contexto de los productos
 
     const [isLoading, setIsLoading] = useState(false);
     const [product, setProduct] = useState({
@@ -19,6 +19,7 @@ function create() {
         // Actualizar producto ([e.target.name]: e.target.value significa que el valor de la propiedad name del estado del producto será igual al valor del campo de entrada)
         setProduct({ ...product, [e.target.name]: e.target.value });
     };
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -35,11 +36,10 @@ function create() {
             if (!response.ok) {
                 throw new Error('Error al agregar el producto');
             }
-            const data = await response.json();
-            console.log('Producto agregado con éxito:', data);
+            console.log('Producto agregado con éxito:');
+            const newProducts = [product, ...products]; // crear un nuevo array de productos con el nuevo producto agregado
 
-            // Después de agregar el producto con éxito, actualiza la lista de productos
-            await fetchProducts();
+            setProducts(newProducts); // seteamos el nuevo array de productos en el estado global de productos
 
             // Restablecer el formulario o el estado del nuevo producto
             setProduct({

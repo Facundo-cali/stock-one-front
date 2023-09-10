@@ -6,11 +6,6 @@ const ProductContext = createContext();
 export function ProductProvider({ children }) {
     const [products, setProducts] = useState([]);
 
-    // Función para agregar productos al estado global
-    const addProduct = (newProduct) => {
-        setProducts([...products, newProduct]);
-    };
-
     // Función para obtener los productos desde la base de datos
     const fetchProducts = async () => {
         try {
@@ -26,7 +21,7 @@ export function ProductProvider({ children }) {
     };
 
     return (
-        <ProductContext.Provider value={{ products, addProduct, fetchProducts }}>
+        <ProductContext.Provider value={{ products, setProducts, fetchProducts }}>
             {children}
         </ProductContext.Provider>
     );

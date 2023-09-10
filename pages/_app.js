@@ -1,5 +1,12 @@
-import '../styles/App.css'
+import '../styles/App.css';
+import { ProductProvider } from '../components/ProductContext'; // Importa ProductProvider desde tu contexto
 
-export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />
+function MyApp({ Component, pageProps }) {
+  return (
+    <ProductProvider> {/* Envuelve tu aplicación con ProductProvider */}
+      <Component {...pageProps} />
+    </ProductProvider>
+  );
 }
+
+export default MyApp;
