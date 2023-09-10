@@ -9,6 +9,7 @@ export function ProductProvider({ children }) {
 
     // Función para obtener los productos desde la base de datos
     const fetchProducts = async () => {
+
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/products/get`);
             if (!response.ok) {
@@ -21,6 +22,7 @@ export function ProductProvider({ children }) {
             console.error('Error:', error);
             setIsLoading(false);
         }
+
     };
 
     return (
