@@ -122,6 +122,18 @@ td {
   border-right: 2px solid #ddd; /* Línea vertical entre las celdas */
 }
 
+/* Estilo para limitar el ancho máximo de la columna de botones */
+td.actions {
+  max-width: 50px;
+  text-align: center;
+}
+/* Estilo para separar y centrar los botones en la columna de acciones */
+td.actions button {
+  margin-right: 13px; /* Agrega un margen derecho entre los botones */
+  margin-left: 13px; /* Agrega un margen izquierdo entre los botones */
+  display: inline-block; /* Hace que los botones se muestren en línea y no ocupen todo el ancho disponible */
+}
+
 /* Estilos para las filas impares de la tabla */
 tr:nth-child(odd) {
   background-color: #f5f5f5;
@@ -158,6 +170,37 @@ th {
 /* Estilos para ocultar el scroll vertical cuando se carga */
 .hide-scroll-bar::-webkit-scrollbar {
   width: 0;
+}
+
+/* Estilo para el botón de borrar */
+.delete-button {
+  background-color: #ff4136; /* Color de fondo rojo */
+  color: white; /* Texto en color blanco */
+  padding: 5px 10px; /* Espaciado interno */
+  border: none; /* Sin borde */
+  border-radius: 5px; /* Borde redondeado */
+  cursor: pointer; /* Cursor de tipo puntero al pasar el mouse */
+}
+
+/* Estilo para el botón de borrar al pasar el mouse */
+.delete-button:hover {
+  background-color: #e50000; /* Color de fondo rojo más oscuro al pasar el mouse */
+}
+
+/* Estilo para el botón de editar */
+.edit-button {
+  background-color: #007bff; /* Color de fondo azul */
+  color: white; /* Texto en color blanco */
+  padding: 5px 10px; /* Espaciado interno */
+  border: none; /* Sin borde */
+  border-radius: 5px; /* Borde redondeado */
+  cursor: pointer; /* Cursor de tipo puntero al pasar el mouse */
+  margin-left: 10px; /* Espacio entre el botón de borrar y editar */
+}
+
+/* Estilo para el botón de editar al pasar el mouse */
+.edit-button:hover {
+  background-color: #0056b3; /* Color de fondo azul más oscuro al pasar el mouse */
 }
 
 .spinner {

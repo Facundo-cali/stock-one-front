@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { useProduct } from './ProductContext';
 
-
-
 function create() {
     const { products, setProducts } = useProduct(); // useProduct() es un hook personalizado que devuelve el contexto de los productos
 
@@ -20,7 +18,6 @@ function create() {
         setProduct({ ...product, [e.target.name]: e.target.value });
     };
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);
@@ -37,9 +34,10 @@ function create() {
                 throw new Error('Error al agregar el producto');
             }
             console.log('Producto agregado con éxito:');
-            const newProducts = [product, ...products]; // crear un nuevo array de productos con el nuevo producto agregado
-
-            setProducts(newProducts); // seteamos el nuevo array de productos en el estado global de productos
+            // Obtener el nuevo producto desde la base de datos
+            const newProduct = await response.json();
+            // Agregar el nuevo producto al estado local de productos sin necesidad de volver a obtener los productos desde la base de datos
+            setProducts([newProduct, ...products]);
 
             // Restablecer el formulario o el estado del nuevo producto
             setProduct({
