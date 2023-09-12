@@ -9,7 +9,6 @@ export function ProductProvider({ children }) {
 
     // Función para obtener los productos desde la base de datos
     const fetchProducts = async () => {
-
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/products/get`);
             if (!response.ok) {
@@ -25,8 +24,24 @@ export function ProductProvider({ children }) {
 
     };
 
+    const deleteProduct = async (id) => {
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/products/delete/${id}`, {
+                method: 'DELETE',
+            });
+            if (!response.ok) {
+                throw new Error('Error al eliminar el producto');
+            }
+            await response.json();
+            setProducts((prevProducts) => prevProducts.filter((product) => product._id !== id)); // Elimina el producto del estado local, sin necesidad de volver a obtener los productos desde la base de datos.
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
+
     return (
-        <ProductContext.Provider value={{ products, setProducts, fetchProducts, isLoading }}>
+        <ProductContext.Provider value={{ products, setProducts, fetchProducts, isLoading, deleteProduct, setIsLoading }}>
             {children}
         </ProductContext.Provider>
     );
