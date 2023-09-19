@@ -39,9 +39,31 @@ export function ProductProvider({ children }) {
         }
     };
 
+    const updateProduct = async (id, updatedData) => {
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/products/update/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedData), // Envía los datos actualizados como JSON en el cuerpo de la solicitud
+            });
+            if (!response.ok) {
+                throw new Error('Error al actualizar el producto');
+            }
+            // Actualiza el producto en el estado local con los datos actualizados
+            setProducts((prevProducts) =>
+                prevProducts.map((product) =>
+                    product._id === id ? { ...product, ...updatedData } : product // Si el id del producto coincide con el id del producto actualizado, devuelve el producto actualizado, de lo contrario devuelve el producto sin cambios
+                )
+            );
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
 
     return (
-        <ProductContext.Provider value={{ products, setProducts, fetchProducts, isLoading, deleteProduct, setIsLoading }}>
+        <ProductContext.Provider value={{ products, setProducts, fetchProducts, isLoading, deleteProduct, setIsLoading, updateProduct }}>
             {children}
         </ProductContext.Provider>
     );
