@@ -14,7 +14,7 @@ export default function Home() {
     }
   }, []);
 
-  const [selectedOption, setSelectedOption] = useState('create');
+  const [selectedOption, setSelectedOption] = useState('view');
   return (
     <div className="home-container">
       <div className="button-container">
@@ -35,5 +35,6 @@ export default function Home() {
       {selectedOption === 'create' && <ProductForm />}
       {selectedOption === 'view' && <ProductList />}
     </div>
+    // Si la opción seleccionada es crear, muestra el formulario de creación de productos, de lo contrario muestra la lista de productos.
   );
 }

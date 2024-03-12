@@ -1,5 +1,6 @@
 import { useProduct } from './ProductContext';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import LoadingSpinner from './LoadingSpinner';
 import Modal from 'react-modal';
 
 
@@ -7,6 +8,8 @@ function ViewProducts() {
     const { products, isLoading, deleteProduct, setIsLoading, updateProduct } = useProduct();
     const [isEditing, setIsEditing] = useState(false);
     const [editedProduct, setEditedProduct] = useState(null);
+
+
 
     // Función para eliminar un producto
     const handleDelete = async (id) => {
@@ -31,6 +34,17 @@ function ViewProducts() {
         setEditedProduct(product);
     };
 
+    // Función para manejar cambios en los campos de edición
+    const handleEditChange = (e) => {
+        const { name, value } = e.target;
+        // Actualiza el producto editado en tiempo real
+        setEditedProduct((prevEditedProduct) => ({
+            ...prevEditedProduct,
+            [name]: value,
+        }));
+    };
+
+
     // Función para guardar los cambios de un producto editado
     const handleSave = async (e) => {
         e.preventDefault();
@@ -45,53 +59,32 @@ function ViewProducts() {
         }
     };
 
-    // Función para manejar cambios en los campos de edición
-    const handleEditChange = (e) => {
-        const { name, value } = e.target;
-        // Actualiza el producto editado en tiempo real
-        setEditedProduct((prevEditedProduct) => ({
-            ...prevEditedProduct,
-            [name]: value,
-        }));
-    };
-
     return (
-        <div className={`table-container ${isLoading ? 'hide-scroll-bar' : ''}`}>
+        <div className={`product-container ${isLoading ? 'hide-scroll-bar' : ''}`}>
             {isLoading ? (
-                <><div className="spinner" id="my-spinner">
-                </div><h2>Al ser un servidor gratuito, si no se ha usado en un tiempo, Azure lo apaga y tarda un poco en encenderlo de nuevo. Por favor, espere unos segundos.</h2></>
+                <LoadingSpinner />
             ) : (
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Código</th>
-                            <th>Cantidad</th>
-                            <th>Precio</th>
-                            <th>Descripción</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {products.map((product) => (
-                            <tr key={product._id}>
-                                <td>{product.name}</td>
-                                <td>{product.code}</td>
-                                <td>{product.quantity}</td>
-                                <td>${product.price}</td>
-                                <td>{product.description}</td>
-                                <td className="actions">
-                                    <button className="delete-button" onClick={() => handleDelete(product._id)}>
-                                        Borrar
-                                    </button>
-                                    <button className="edit-button" onClick={() => handleEdit(product._id)}>
-                                        Editar
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                <div className="products">
+                    {products.map((product) => (
+                        <div className="product" key={product._id}>
+                            <div className="product-info">
+                                <span className="product-name">{product.name} ({product.code}):</span>
+                                <span>Entró: {product.entro}</span>
+                                <span>Salió: {product.salio}</span>
+                                <span>En Mano: {product.enmano}</span>
+
+                            </div>
+                            <div className="actions">
+                                <button className="delete-button" onClick={() => handleDelete(product._id)}>
+                                    Borrar
+                                </button>
+                                <button className="edit-button" onClick={() => handleEdit(product._id)}>
+                                    Editar
+                                </button>
+                            </div>
+                        </div>
+                    ))}
+                </div>
             )}
             <Modal
                 isOpen={isEditing}
@@ -121,29 +114,50 @@ function ViewProducts() {
                                 />
                             </label>
                             <label>
-                                Cantidad:
+                                Entró:
                                 <input
                                     type="number"
-                                    name="quantity"
-                                    value={editedProduct.quantity}
+                                    name="entro"
+                                    value={editedProduct.entro}
                                     onChange={handleEditChange}
                                 />
                             </label>
                             <label>
-                                Precio Unitario:
+                                Salió:
+                                <input
+                                    type="number"
+                                    name="salio"
+                                    value={editedProduct.salio}
+                                    onChange={handleEditChange}
+                                />
+                            </label>
+                            <label>
+                                En Mano:
                                 <input
                                     type="number"
                                     step="0.01"
-                                    name="price"
-                                    value={editedProduct.price}
+                                    name="enmano"
+                                    value={editedProduct.enmano}
                                     onChange={handleEditChange}
                                 />
                             </label>
                             <label>
-                                Descripción:
-                                <textarea
-                                    name="description"
-                                    value={editedProduct.description}
+                                Precio Unidad:
+                                <input
+                                    type="number"
+                                    step="0.01"
+                                    name="preciou"
+                                    value={editedProduct.preciou}
+                                    onChange={handleEditChange}
+                                />
+                            </label>
+                            <label>
+                                Precio total:
+                                <input
+                                    type="number"
+                                    step="0.01"
+                                    name="preciototal"
+                                    value={editedProduct.preciototal}
                                     onChange={handleEditChange}
                                 />
                             </label>
