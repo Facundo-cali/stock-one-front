@@ -8,9 +8,11 @@ function create() {
     const [product, setProduct] = useState({
         name: '',
         code: '',
-        quantity: '',
-        price: '',
-        description: '',
+        entro: '',
+        salio: '',
+        enmano: '',
+        preciou: '',
+        preciototal: '',
     });
 
     const handleChange = (e) => {
@@ -43,9 +45,11 @@ function create() {
             setProduct({
                 name: '',
                 code: '',
-                quantity: '',
-                price: '',
-                description: '',
+                entro: '',
+                salio: '',
+                enmano: '',
+                preciou: '',
+                preciototal: '',
             });
         } catch (error) {
             console.error('Error:', error);
@@ -78,11 +82,31 @@ function create() {
                 />
             </label>
             <label>
-                Cantidad:
+                Entró:
                 <input
                     type="number"
-                    value={product.quantity}
-                    name='quantity'
+                    value={product.entro}
+                    name='entro'
+                    onChange={handleChange}
+                    required
+                />
+            </label>
+            <label>
+                Salió:
+                <input
+                    type="number"
+                    value={product.salio}
+                    name='salio'
+                    onChange={handleChange}
+                    required
+                />
+            </label>
+            <label>
+                En Mano:
+                <input
+                    type="number"
+                    value={product.enmano}
+                    name='enmano'
                     onChange={handleChange}
                     required
                 />
@@ -92,18 +116,21 @@ function create() {
                 <input
                     type="number"
                     step="0.01"
-                    value={product.price}
-                    name='price'
+                    value={product.preciou}
+                    name='preciou'
                     onChange={handleChange}
                     required
                 />
             </label>
             <label>
-                Descripción:
-                <textarea
-                    value={product.description}
-                    name='description'
+                Precio Total:
+                <input
+                    type="number"
+                    step="0.01"
+                    value={product.preciototal}
+                    name='preciototal'
                     onChange={handleChange}
+                    required
                 />
             </label>
             <button type="submit" disabled={isLoading}>{isLoading ? 'Creando producto' : 'Crear producto'}</button>

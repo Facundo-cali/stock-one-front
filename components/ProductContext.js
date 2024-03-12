@@ -70,5 +70,5 @@ export function ProductProvider({ children }) {
 }
 
 export function useProduct() {
-    return useContext(ProductContext);
+    return useContext(ProductContext); // Retorna el contexto de productos
 }

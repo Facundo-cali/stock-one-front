@@ -30,6 +30,7 @@ export function AuthProvider({ children }) {
                 // Error en el inicio de sesión, muestra el mensaje de error
                 alert(data.message);
             }
+
         } catch (error) {
             console.error('Error de inicio de sesión:', error);
         }

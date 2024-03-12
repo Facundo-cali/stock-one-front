@@ -8,7 +8,6 @@ body {
 /* Estilos para el contenedor principal */
 .home-container {
   display: flex;
-  justify-content: flex-start; /* Botones a la izquierda */
   align-items: center;
   height: 100vh;
   padding: 20px;
@@ -93,78 +92,36 @@ button[type="submit"]:hover {
   background-color: #0056b3;
 }
 
-/* Estilos para el contenedor de la tabla */
-.table-container {
+/* Estilos para productos */
+.product-container {
+  display: flex;
+  flex-grow: 1;
+  margin: 3% 3% 3% 3%;
+}
+
+.product {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #f4f4f4;
   border-radius: 10px;
-  width: 80%;
-  margin: 20px auto;
-  max-height: 800px; /* Establece la altura máxima deseada */
-  overflow-y: auto; /* Agrega desplazamiento vertical si la tabla excede la altura */
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+.products {
+  width: 100%; /*para que ocupe todo el ancho cada producto */
 }
 
-/* Estilos para la tabla */
-table {
-  width: 100%;
-  font-family: Arial, sans-serif;
-  background-color: #fff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  border-collapse: collapse;
+.product-name {
+  font-weight: bold;
+  font-size: 18px;
+  color: #333;
 }
 
-/* Estilos para las celdas de la tabla (th y td) */
-th,
-td {
-  padding: 15px; /* Espacio interno para las celdas */
-  border-bottom: 2px solid #ddd;
-  text-align: left;
+.product-detail {
+  margin-right: 20px;
   font-size: 16px;
-  border-right: 2px solid #ddd; /* Línea vertical entre las celdas */
-}
-
-/* Estilo para limitar el ancho máximo de la columna de botones */
-td.actions {
-  max-width: 50px;
-  text-align: center;
-}
-/* Estilo para separar y centrar los botones en la columna de acciones */
-td.actions button {
-  margin-right: 13px; /* Agrega un margen derecho entre los botones */
-  margin-left: 13px; /* Agrega un margen izquierdo entre los botones */
-  display: inline-block; /* Hace que los botones se muestren en línea y no ocupen todo el ancho disponible */
-}
-
-/* Estilos para las filas impares de la tabla */
-tr:nth-child(odd) {
-  background-color: #f5f5f5;
-}
-
-/* Estilos para las celdas de encabezado (th) */
-th {
-  background-color: #007bff;
-  color: white;
-  border-right: 2px solid #ddd; /* Línea vertical entre las celdas */
-}
-
-/* Estilos para el scroll vertical */
-.table-container::-webkit-scrollbar {
-  width: 10px; /* Ancho del scroll vertical */
-}
-
-/* Estilos para el track del scroll */
-.table-container::-webkit-scrollbar-track {
-  background-color: #f1f1f1; /* Color de fondo del track */
-}
-
-/* Estilos para el thumb (barra de desplazamiento) del scroll */
-.table-container::-webkit-scrollbar-thumb {
-  background-color: #007bff; /* Color de la barra de desplazamiento */
-  border-radius: 5px; /* Borde redondeado de la barra de desplazamiento */
-}
-
-/* Estilos cuando se pasa el mouse sobre el thumb del scroll */
-.table-container::-webkit-scrollbar-thumb:hover {
-  background-color: #0056b3; /* Color de la barra de desplazamiento al pasar el mouse */
 }
 
 /* Estilos para ocultar el scroll vertical cuando se carga */
