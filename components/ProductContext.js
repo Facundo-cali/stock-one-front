@@ -5,11 +5,40 @@ const ProductContext = createContext();
 // ProductProvider es un componente que envuelve a todos los componentes que necesitan acceder al estado de los productos
 export function ProductProvider({ children }) {
     const [products, setProducts] = useState([]);
-    const [isLoading, setIsLoading] = useState(true); // Agrega una variable de estado isLoading
+    const [isLoading, setIsLoading] = useState(true);
+    const [isEditing, setIsEditing] = useState(false); // Estado para controlar si se está editando un producto
+
+    const [selectedProduct, setSelectedProduct] = useState(null);
+    const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+    const openDetailsModal = (product) => {
+        setSelectedProduct(product);
+        setIsDetailsModalOpen(true);
+    };
+
+    const closeDetailsModal = () => {
+        console.log('Closing details modal...');
+        setSelectedProduct(null);
+        setIsDetailsModalOpen(false);
+    };
+
+    const openEditModal = (product) => {
+        setSelectedProduct(product);
+        setIsEditModalOpen(true);
+    };
+
+    const closeEditModal = () => {
+        setSelectedProduct(null);
+        setIsEditModalOpen(false);
+    };
 
     // Función para obtener los productos desde la base de datos
     const fetchProducts = async () => {
         try {
+            await new Promise(resolve => {
+                setTimeout(resolve, 3000);
+            });
             const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/products/get`);
             if (!response.ok) {
                 throw new Error('Error al obtener los productos');
@@ -21,7 +50,6 @@ export function ProductProvider({ children }) {
             console.error('Error:', error);
             setIsLoading(false);
         }
-
     };
 
     const deleteProduct = async (id) => {
@@ -38,6 +66,8 @@ export function ProductProvider({ children }) {
             console.error('Error:', error);
         }
     };
+
+
 
     const updateProduct = async (id, updatedData) => {
         try {
@@ -63,7 +93,7 @@ export function ProductProvider({ children }) {
     }
 
     return (
-        <ProductContext.Provider value={{ products, setProducts, fetchProducts, isLoading, deleteProduct, setIsLoading, updateProduct }}>
+        <ProductContext.Provider value={{ products, setIsLoading, isLoading, selectedProduct, isDetailsModalOpen, isEditModalOpen, openDetailsModal, closeDetailsModal, openEditModal, closeEditModal, fetchProducts, deleteProduct, updateProduct, isEditing, setIsEditing }}>
             {children}
         </ProductContext.Provider>
     );

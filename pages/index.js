@@ -22,18 +22,33 @@ export default function Home() {
           className="custom-button"
           onClick={() => setSelectedOption('create')}
         >
-          Crear Producto
+          <p>Crear Producto(para pruebas)</p>
         </button>
         <button
           className="custom-button"
           onClick={() => setSelectedOption('view')}
         >
-          Ver Productos
+          Productos
+        </button>
+        <button
+          className="custom-button"
+          onClick={() => setSelectedOption('lowStock')}
+        >
+          Stock bajo
+        </button>
+        <button
+          className="custom-button"
+          onClick={() => setSelectedOption('transactions')}
+        >
+          Transacciones
         </button>
       </div>
 
       {selectedOption === 'create' && <ProductForm />}
       {selectedOption === 'view' && <ProductList />}
+      {/* {selectedOption === 'lowStock' && <LowStock />} */}
+      {selectedOption === 'transactions' && <Transactions />}
+
     </div>
     // Si la opción seleccionada es crear, muestra el formulario de creación de productos, de lo contrario muestra la lista de productos.
   );

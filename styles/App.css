@@ -95,6 +95,7 @@ button[type="submit"]:hover {
 /* Estilos para productos */
 .product-container {
   display: flex;
+  flex-direction: column;
   flex-grow: 1;
   margin: 3% 3% 3% 3%;
 }
@@ -206,7 +207,6 @@ button[type="submit"]:hover {
   animation: spin 1s linear infinite;
   margin: 0 auto;
 }
-
 @keyframes spin {
   0% {
     transform: rotate(0deg);
