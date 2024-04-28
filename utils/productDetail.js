@@ -2,11 +2,12 @@ import React from 'react';
 import Modal from 'react-modal';
 import { useProduct } from '../components/ProductContext';
 import { useState } from 'react';
-import ModalComponent from './modalEdit';
+import EditModal from './modalEdit';
+import ModalTransaction from './modalTransaction';
 
 const ProductDetail = ({ product }) => {
 
-    const { deleteProduct, isLoading, setIsLoading, products, isDetailsModalOpen, isEditModalOpen, openDetailsModal, closeDetailsModal, openEditModal, closeEditModal, setIsEditing, isEditing } = useProduct();
+    const { deleteProduct, setIsLoading, products, isDetailsModalOpen, closeDetailsModal, openEditModal, setIsEditing, isEditing, openTransactionModal, closeTransactionModal, isTransactionModalOpen, selectedProduct } = useProduct();
 
 
     const [editedProduct, setEditedProduct] = useState(null);
@@ -17,6 +18,11 @@ const ProductDetail = ({ product }) => {
         const product = products.find((product) => product._id === id);
         setEditedProduct(product);
         openEditModal(product);
+    };
+
+    // Funcion para hacer una transacción
+    const handleTransaction = () => {
+        openTransactionModal(product);
     };
 
     // Función para manejar cambios en los campos de edición
@@ -48,43 +54,51 @@ const ProductDetail = ({ product }) => {
 
 
     return (
-        <Modal
-            isOpen={isDetailsModalOpen}
-            onRequestClose={closeDetailsModal}
-            className="custom-modal"
-        >
-            <div className="edit-form">
-                <h2>Detalles del Producto</h2>
-                {product && (
-                    <div>
-                        <p>Nombre: {product.name}</p>
-                        <p>Código: {product.code}</p>
-                        <p>Entró: {product.entro}</p>
-                        <p>Salió: {product.salio}</p>
-                        <p>Precio Unidad: {product.preciou}</p>
-                        <p>Precio Total: {product.preciototal}</p>
+        <>
+            <Modal
+                isOpen={isDetailsModalOpen}
+                onRequestClose={closeDetailsModal}
+                className="custom-modal"
+            >
+                <div className="edit-form">
+                    <h2>Detalles del Producto</h2>
+                    {product && (
+                        <div>
+                            <p>Nombre: {product.name}</p>
+                            <p>Código: {product.code}</p>
+                            <p>Entró: {product.entro}</p>
+                            <p>Salió: {product.salio}</p>
+                            <p>Precio Unidad: {product.preciou}</p>
+                            <p>Precio Total: {product.preciototal}</p>
+                        </div>
+                    )}
+                    <div className="centered-button">
+                        <button className="save-button" onClick={closeDetailsModal}>Cerrar</button>
                     </div>
-                )}
-                <div className="centered-button">
-                    <button className="save-button" onClick={closeDetailsModal}>Cerrar</button>
+                    <div className="centered-button">
+                        <button className="delete-button" onClick={() => handleDelete(product._id)}>Borrar</button>
+                    </div>
+                    <div className="centered-button">
+                        <button className="edit-button" onClick={() => { handleEdit(product._id) }}>Editar</button>
+                    </div>
+                    <div className="centered-button">
+                        <button className="add-button" onClick={() => handleTransaction(product._id)}>Transacción</button>
+                    </div>
                 </div>
-                <div className="centered-button">
-                    <button className="delete-button" onClick={() => handleDelete(product._id)}>Borrar</button>
-                </div>
-                <div className="centered-button">
-                    <button className="edit-button" onClick={() => { handleEdit(product._id) }}>
-                        Editar
-                    </button>
-                </div>
-            </div>
-            {/* Renderiza el componente ModalComponent */}
-            <ModalComponent
+            </Modal>
+            {/* Renderizar los modales fuera del componente Modal */}
+            <EditModal
                 isOpen={isEditing}
                 onRequestClose={() => setIsEditing(false)}
                 editedProduct={editedProduct}
                 handleEditChange={handleEditChange}
             />
-        </Modal>
+            <ModalTransaction
+                isOpen={isTransactionModalOpen}
+                onRequestClose={closeTransactionModal}
+                product={product}
+            />
+        </>
     );
 };
 

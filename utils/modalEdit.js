@@ -2,9 +2,9 @@ import React from 'react';
 import Modal from 'react-modal';
 import { useProduct } from '../components/ProductContext';
 
-function ModalComponent({ isOpen, onRequestClose, editedProduct, handleEditChange }) {
+function EditModal({ isOpen, onRequestClose, editedProduct, handleEditChange }) {
 
-    const { updateProduct, setIsLoading, closeDetailsModal, setIsEditing, isEditing } = useProduct();
+    const { updateProduct, setIsLoading, closeDetailsModal, setIsEditing } = useProduct();
 
     // Función para guardar los cambios de un producto editado
     const handleSave = async (e) => {
@@ -22,7 +22,6 @@ function ModalComponent({ isOpen, onRequestClose, editedProduct, handleEditChang
         }
     };
 
-
     return (
         <Modal
             isOpen={isOpen}
@@ -34,15 +33,6 @@ function ModalComponent({ isOpen, onRequestClose, editedProduct, handleEditChang
                 {editedProduct && (
                     <form>
                         <label>
-                            Nombre del Producto:
-                            <input
-                                type="text"
-                                name="name"
-                                value={editedProduct.name}
-                                onChange={handleEditChange}
-                            />
-                        </label>
-                        <label>
                             Código del Producto:
                             <input
                                 type="text"
@@ -52,32 +42,16 @@ function ModalComponent({ isOpen, onRequestClose, editedProduct, handleEditChang
                             />
                         </label>
                         <label>
-                            Entró:
-                            <input
-                                type="number"
-                                name="entro"
-                                value={editedProduct.entro}
-                                onChange={handleEditChange}
-                            />
+                            <p> Nombre del Producto: {editedProduct.name}</p>
                         </label>
                         <label>
-                            Salió:
-                            <input
-                                type="number"
-                                name="salio"
-                                value={editedProduct.salio}
-                                onChange={handleEditChange}
-                            />
+                            <p>Entró: {editedProduct.entro}</p>
                         </label>
                         <label>
-                            En Mano:
-                            <input
-                                type="number"
-                                step="0.01"
-                                name="enmano"
-                                value={editedProduct.enmano}
-                                onChange={handleEditChange}
-                            />
+                            <p>Salió: {editedProduct.salio}</p>
+                        </label>
+                        <label>
+                            <p>En Mano: {editedProduct.enmano}</p>
                         </label>
                         <label>
                             Precio Unidad:
@@ -90,14 +64,7 @@ function ModalComponent({ isOpen, onRequestClose, editedProduct, handleEditChang
                             />
                         </label>
                         <label>
-                            Precio total:
-                            <input
-                                type="number"
-                                step="0.01"
-                                name="preciototal"
-                                value={editedProduct.preciototal}
-                                onChange={handleEditChange}
-                            />
+                            <p>Precio Total: {editedProduct.preciototal}</p>
                         </label>
                         <div className="centered-button">
                             <button className="save-button" onClick={handleSave}>Guardar Cambios</button>
@@ -109,4 +76,4 @@ function ModalComponent({ isOpen, onRequestClose, editedProduct, handleEditChang
     );
 }
 
-export default ModalComponent;
+export default EditModal;

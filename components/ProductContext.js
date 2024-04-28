@@ -4,14 +4,27 @@ const ProductContext = createContext();
 
 // ProductProvider es un componente que envuelve a todos los componentes que necesitan acceder al estado de los productos
 export function ProductProvider({ children }) {
-    const [products, setProducts] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const [products, setProducts] = useState([]);  // Estado para almacenar los productos
+    const [isLoading, setIsLoading] = useState(true);  // Estado para controlar si se están cargando los productos
     const [isEditing, setIsEditing] = useState(false); // Estado para controlar si se está editando un producto
 
+    //producto seleccionado
     const [selectedProduct, setSelectedProduct] = useState(null);
-    const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
-    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
+    //transacciones
+    const [isTransactionModalOpen, setIsTransactionModalOpen] = useState(false);
+    const openTransactionModal = (productId) => {
+        setSelectedProduct(productId);
+        setIsTransactionModalOpen(true);
+    };
+
+    const closeTransactionModal = () => {
+        console.log('Closing transaction modal...');
+        setIsTransactionModalOpen(false);
+    };
+
+    //detalles
+    const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
     const openDetailsModal = (product) => {
         setSelectedProduct(product);
         setIsDetailsModalOpen(true);
@@ -23,6 +36,8 @@ export function ProductProvider({ children }) {
         setIsDetailsModalOpen(false);
     };
 
+    //edicion
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const openEditModal = (product) => {
         setSelectedProduct(product);
         setIsEditModalOpen(true);
@@ -93,7 +108,7 @@ export function ProductProvider({ children }) {
     }
 
     return (
-        <ProductContext.Provider value={{ products, setIsLoading, isLoading, selectedProduct, isDetailsModalOpen, isEditModalOpen, openDetailsModal, closeDetailsModal, openEditModal, closeEditModal, fetchProducts, deleteProduct, updateProduct, isEditing, setIsEditing }}>
+        <ProductContext.Provider value={{ products, setIsLoading, isLoading, selectedProduct, isDetailsModalOpen, isEditModalOpen, openDetailsModal, closeDetailsModal, openEditModal, closeEditModal, fetchProducts, deleteProduct, updateProduct, isEditing, setIsEditing, openTransactionModal, closeTransactionModal, isTransactionModalOpen }}>
             {children}
         </ProductContext.Provider>
     );

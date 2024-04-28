@@ -1,5 +1,4 @@
 import { useProduct } from './ProductContext';
-import { useState } from 'react';
 import LoadingSpinner from '../utils/LoadingSpinner';
 import TotalesContainer from '../utils/calcularTotales';
 import ProductDetail from '@/utils/productDetail';
@@ -7,7 +6,7 @@ import ProductDetail from '@/utils/productDetail';
 
 
 function ViewProducts() {
-    const { products, isLoading, isDetailsModalOpen, isEditModalOpen, openDetailsModal, closeDetailsModal, openEditModal, closeEditModal, selectedProduct } = useProduct();
+    const { products, isLoading, isDetailsModalOpen, openDetailsModal, selectedProduct } = useProduct();
 
     return (
         <>
