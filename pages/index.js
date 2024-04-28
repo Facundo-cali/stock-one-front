@@ -36,18 +36,18 @@ export default function Home() {
         >
           Stock bajo
         </button>
-        <button
+        {/* <button
           className="custom-button"
           onClick={() => setSelectedOption('transactions')}
         >
           Transacciones
-        </button>
+        </button> */}
       </div>
 
       {selectedOption === 'create' && <ProductForm />}
       {selectedOption === 'view' && <ProductList />}
       {/* {selectedOption === 'lowStock' && <LowStock />} */}
-      {selectedOption === 'transactions' && <Transactions />}
+      {/* {selectedOption === 'transactions' && <Transactions />} */}
 
     </div>
     // Si la opción seleccionada es crear, muestra el formulario de creación de productos, de lo contrario muestra la lista de productos.
